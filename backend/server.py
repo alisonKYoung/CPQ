@@ -2,4 +2,7 @@ import mongo
 
 class Server:
     def __init__(self):
-        self.db = mongo.Database()
+        self.database = mongo.Database()
+        self.database.db["Current Answers"].delete_many({})
+        #temp
+        self.database.db["Current Answers"].insert_one({"a1": True, "b0": "a", "c2": 4})
