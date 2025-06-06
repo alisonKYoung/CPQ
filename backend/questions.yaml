@@ -13,5 +13,13 @@ answers:
     a: ["scott"]
     b: ["alison"]
     c: ["amy"]
+  c2:
+    type: rating
+    value: 1
+    "1": ["amy"]
+    "2": []
+    "3": []
+    "4": ["alison"]
+    "5": ["scott"] 
 
 names: ["alison", "amy", "scott"]
