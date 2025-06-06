@@ -1,8 +1,8 @@
 import yaml
 from server import Server
 class CalcPoints:
-    def __init__(self):
-        self.server = Server()
+    def __init__(self, server):
+        self.server = server
 
         with open("backend/questions.yaml", "r") as f:
             self.questions = yaml.load(f, yaml.Loader)
@@ -28,4 +28,6 @@ class CalcPoints:
                     answer = str(answer)
                 for person in vals[answer]:
                     point_totals[person] += vals["value"]
+        self.server.database.upload_data("Answers", answers)
         print(point_totals)
+        return point_totals
