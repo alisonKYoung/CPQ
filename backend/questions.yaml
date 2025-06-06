@@ -1,10 +1,17 @@
 schema_file:
-  version: 1
+  version: 2
 
 answers:
   a1:
     type: bool
     value: 5
+    if_true: ["amy"]
+    if_false: ["alison", "scott"]
   b0:
     type: str
     value: 3
+    a: ["scott"]
+    b: ["alison"]
+    c: ["amy"]
+
+names: ["alison", "amy", "scott"]
