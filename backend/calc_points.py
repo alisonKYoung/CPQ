@@ -23,7 +23,9 @@ class CalcPoints:
                 else:
                     for person in vals["if_false"]:
                         point_totals[person] += vals["value"]
-            elif vals["type"] == "str":
+            else:
+                if vals["type"] == "int":
+                    answer = str(answer)
                 for person in vals[answer]:
                     point_totals[person] += vals["value"]
         print(point_totals)

@@ -6,7 +6,7 @@ class Database:
         self.db = self.client.Data
 
         #temp
-        self.db["Current Answers"].insert_one({"a1": True, "b0": "a"})
+        self.db["Current Answers"].insert_one({"a1": True, "b0": "a", "c2": 4})
     def get_data(self, collection, query = dict()):
         documents = list(self.db[collection].find(query))
         filtered = []
