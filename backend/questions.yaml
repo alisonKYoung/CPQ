@@ -1,0 +1,10 @@
+schema_file:
+  version: 1
+
+answers:
+  a1:
+    type: bool
+    value: 5
+  b0:
+    type: str
+    value: 3
