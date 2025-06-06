@@ -5,8 +5,6 @@ class Database:
         self.client = MongoClient("mongodb+srv://itzmind:ZVp41BnJG0WisQYw@evilsecrets.nbxj92y.mongodb.net/", 1678)
         self.db = self.client.Data
 
-        #temp
-        self.db["Current Answers"].insert_one({"a1": True, "b0": "a", "c2": 4})
     def get_data(self, collection, query = dict()):
         documents = list(self.db[collection].find(query))
         filtered = []

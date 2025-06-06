@@ -8,7 +8,7 @@ class CalcPoints:
             self.questions = yaml.load(f, yaml.Loader)
     
     def pull_data(self):
-        answers = self.server.db.get_data("Current Answers")[0]
+        answers = self.server.database.get_data("Current Answers")[0]
         return answers
     
     def calc_points(self):
@@ -24,7 +24,7 @@ class CalcPoints:
                     for person in vals["if_false"]:
                         point_totals[person] += vals["value"]
             else:
-                if vals["type"] == "int":
+                if vals["type"] == "rating":
                     answer = str(answer)
                 for person in vals[answer]:
                     point_totals[person] += vals["value"]
