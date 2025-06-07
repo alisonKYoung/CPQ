@@ -29,6 +29,9 @@ class CalcPoints:
                     answer = str(answer)
                 for person in vals[answer]:
                     point_totals[person] += vals["value"]
+        max_key = max(point_totals, key=point_totals.get)
+        answers["winner"] = max_key
+        self.server.database.upload_data("Results", {"winner": max_key})
         self.server.database.upload_data("Answers", answers)
         print(point_totals)
         return point_totals
