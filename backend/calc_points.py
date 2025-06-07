@@ -14,6 +14,7 @@ class CalcPoints:
     def calc_points(self):
         answers = self.pull_data()
         point_totals = {name: 0 for name in self.questions["names"]}
+        print(answers)
         for question, vals in self.questions["answers"].items():
             answer = answers[question]
             if vals["type"] == "bool":
