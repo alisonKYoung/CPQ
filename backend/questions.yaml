@@ -1,25 +1,207 @@
 schema_file:
-  version: 2
+  version: 3
 
 answers:
-  a1:
+  #Would you shoot me in the foot for good pizza?
+  "0":
     type: bool
-    value: 5
-    if_true: ["amy"]
-    if_false: ["alison", "scott"]
-  b0:
-    type: str
-    value: 3
-    a: ["scott"]
-    b: ["alison"]
-    c: ["amy"]
-  c2:
-    type: rating
     value: 1
-    "1": ["amy"]
+    if_true: ["sarah"]
+    if_false: ["alison"]
+  #If you were my parent and I came out as gay would you disown me?
+  "1":
+    type: bool
+    value: 1
+    if_true: ["amy"]
+    if_false: ["alison"]
+  #If you were my parent and I came out as straight would you disown me?
+  "2":
+    type: bool
+    value: 1
+    if_true: ["alison"]
+    if_false: ["scott", "amy"]
+  #Would you still be friends with me if I was short?
+  "3":
+    type: bool
+    value: 1
+    if_true: ["blake"]
+    if_false: ["alison", "scott", "sarah", "amy"]
+  #If you traveled back in time would you tell my mom to get an abortion?
+  "4":
+    type: bool
+    value: 1
+    if_true: []
+    if_false: ["alison", "scott", "sarah", "amy", "blake"]
+  #5 is str
+  #If I tripped and fell would you laugh?
+  "6":
+    type: bool
+    value: 1
+    if_true: ["alison", "amy", "sarah", "scott"]
+    if_false: ["blake"]
+  #7 is str
+  #Would you hit me hard and soft?
+  "8":
+    type: bool
+    value: 1
+    if_true: ["alison", "scott"]
+    if_false: ["amy", "blake"]
+  #If you killed yourself would I be happier than ever?
+  "9":
+    type: bool
+    value: 1
+    if_true: ["sarah"]
+    if_false: ["scott"]
+  #If you got everything you wanted would you let me get everything I wanted?
+  "10":
+    type: bool
+    value: 1
+    if_true: ["amy"]
+    if_false: ["sarah", "alison"]
+  #If I was modern art...
+  "11":
+    type: bool
+    value: 1
+    if_true: ["amy"]
+    if_false: ["blake"]
+  #Are you indecisive?
+  "12":
+    type: str
+    value: 1
+    A: ["alison"]
+    B: []
+    C: ["scott", "amy"]
+    D: []
+  #If this was a multiple choice what answer would you choose?
+  "13":
+    type: str
+    value: 1
+    A: []
+    B: []
+    C: ["amy"]
+    D: ["alison", "scott"]
+  #If we were both old and in a retirement community would you act like you don't know me
+  "14":
+    type: bool
+    value: 1
+    if_true: ["blake", "sarah", "scott"]
+    if_false: ["alison", "amy"]
+  #If I died would you pretend to have been my real friend?
+  "15":
+    type: bool
+    value: 1
+    if_true: ["alison"]
+    if_false: ["amy"]
+  #If I called you by your name would you call me by my name?
+  "16":
+    type: bool
+    value: 1
+    if_true: ["alison", "scott", "sarah"]
+    if_false: ["blake", "amy"]
+  #17,18,19 are str
+  #Would 100 me's beat a gorilla?
+  "20":
+    type: bool
+    value: 1
+    if_true: []
+    if_false: ["alison", "scott"]
+  #Rate this joke: Your Mother
+  "21":
+    type: int
+    value: 1
+    "1": ["alison", "amy"]
+    "2": []
+    "3": ["blake"]
+    "4": []
+    "5": ["scott", "sarah"]
+  #Rate this joke: What is blue and smells like red paint? Red paint to a color blind person
+  "22":
+    type: int
+    value: 1
+    "1": []
+    "2": ["scott"]
+    "3": []
+    "4": []
+    "5": ["alison", "amy"]
+  #Rate this joke: 2 robots drive into a bar. The 3rd was not a Tesla.
+  "23":
+    type: int
+    value: 1
+    "1": []
     "2": []
     "3": []
-    "4": ["alison"]
-    "5": ["scott"] 
+    "4": []
+    "5": ["alison", "scott", "amy"]
+  #If I was Trump would you have better aim?
+  "24":
+    type: bool
+    value: 1
+    if_true: ["alison"]
+    if_false: ["scott", "blake"]
+  #Would you suicide bomb citrus to end world hunger?
+  "25":
+    type: bool
+    value: 1
+    if_true: ["sarah"]
+    if_false: ["alison", "scott"]
+  #Conversion therapy is good yes or yes?
+  "26":
+    type: bool
+    value: 1
+    if_true: ["scott", "amy"]
+    if_false: ["alison"]
+  #Would you send your favorite ADHD friend to a camp to help concentration?
+  "27":
+    type: bool
+    value: 1
+    if_true: ["amy"]
+    if_false: ["blake"]
+  #28 str
+  #How likely do you think I would be to save you from an oven?
+  "29":
+    type: int
+    value: 1
+    "1": []
+    "2": ["amy"]
+    "3": []
+    "4": ["scott"]
+    "5": ["alison"]
+  #If you were in 1930's Germany how likely would you have survived?
+  "30":
+    type: int
+    value: 1
+    "1": ["alison", "scott"]
+    "2": ["sarah"]
+    "3": ["amy"]
+    "4": []
+    "5": ["blake"]
+  #If I was the CCP would you share stuff with me?
+  "31":
+    type: bool
+    value: 1
+    if_true: ["amy"]
+    if_false: ["alison"]
+  #Do you know what happened on May 35th, 1989?
+  "32":
+    type: bool
+    value: 1
+    if_true: ["amy", "alison"]
+    if_false: ["scott", "blake"]
+  #When God sings with his creations, will you not be part of the choir?
+  "33":
+    type: bool
+    value: 1
+    if_true: ["alison"]
+    if_false: ["scott"]
+  #Who made that last question? A: scott, b: alison, c: amy, d: someone else
+  "34":
+    type: str
+    value: 1
+    A: ["alison", "scott"]
+    B: []
+    C: []
+    D: []
+  #35 str
 
-names: ["alison", "amy", "scott"]
+
+names: ["alison", "amy", "blake", "sarah", "scott"]
