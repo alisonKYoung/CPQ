@@ -24,7 +24,7 @@ class CalcPoints:
                     for person in vals["if_false"]:
                         point_totals[person] += vals["value"]
             else:
-                if vals["type"] == "rating":
+                if vals["type"] == "int":
                     answer = str(answer)
                 for person in vals[answer]:
                     point_totals[person] += vals["value"]
