@@ -1,4 +1,3 @@
-import yaml
 from pymongo import MongoClient
 
 class Database:
@@ -36,8 +35,206 @@ class CalcPoints:
     def __init__(self, server):
         self.server = server
 
-        with open("backend/questions.yaml", "r") as f:
-            self.questions = yaml.load(f, yaml.Loader)
+        self.questions = {
+            "answers": {
+                "0": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["sarah"],
+                    "if_false": ["alison"]
+                },
+                "1": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["amy"],
+                    "if_false": ["alison"]
+                },
+                "2": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["alison"],
+                    "if_false": ["scott", "amy"]
+                },
+                "3": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["blake"],
+                    "if_false": ["alison", "scott", "sarah", "amy"]
+                },
+                "4": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": [],
+                    "if_false": ["alison", "scott", "sarah", "amy", "blake"]
+                },
+                "6": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["alison", "amy", "sarah", "scott"],
+                    "if_false": ["blake"]
+                },
+                "8": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["alison", "scott"],
+                    "if_false": ["amy", "blake"]
+                },
+                "9": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["sarah"],
+                    "if_false": ["scott"]
+                },
+                "10": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["amy"],
+                    "if_false": ["sarah", "alison"]
+                },
+                "11": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["amy"],
+                    "if_false": ["blake"]
+                },
+                "12": {
+                    "type": "str",
+                    "value": 1,
+                    "A": ["alison"],
+                    "B": [],
+                    "C": ["scott", "amy"],
+                    "D": []
+                },
+                "13": {
+                    "type": "str",
+                    "value": 1,
+                    "A": [],
+                    "B": [],
+                    "C": ["amy"],
+                    "D": ["alison", "scott"]
+                },
+                "14": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["blake", "sarah", "scott"],
+                    "if_false": ["alison", "amy"]
+                },
+                "15": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["alison"],
+                    "if_false": ["amy"]
+                },
+                "16": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["alison", "scott", "sarah"],
+                    "if_false": ["blake", "amy"]
+                },
+                "20": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": [],
+                    "if_false": ["alison", "scott"]
+                },
+                "21": {
+                    "type": "int",
+                    "value": 1,
+                    "1": ["alison", "amy"],
+                    "2": [],
+                    "3": ["blake"],
+                    "4": [],
+                    "5": ["scott", "sarah"]
+                },
+                "22": {
+                    "type": "int",
+                    "value": 1,
+                    "1": [],
+                    "2": ["scott"],
+                    "3": [],
+                    "4": [],
+                    "5": ["alison", "amy"]
+                },
+                "23": {
+                    "type": "int",
+                    "value": 1,
+                    "1": [],
+                    "2": [],
+                    "3": [],
+                    "4": [],
+                    "5": ["alison", "scott", "amy"]
+                },
+                "24": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["alison"],
+                    "if_false": ["scott", "blake"]
+                },
+                "25": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["sarah"],
+                    "if_false": ["alison", "scott"]
+                },
+                "26": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["scott", "amy"],
+                    "if_false": ["alison"]
+                },
+                "27": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["amy"],
+                    "if_false": ["blake"]
+                },
+                "29": {
+                    "type": "int",
+                    "value": 1,
+                    "1": [],
+                    "2": ["amy"],
+                    "3": [],
+                    "4": ["scott"],
+                    "5": ["alison"]
+                },
+                "30": {
+                    "type": "int",
+                    "value": 1,
+                    "1": ["alison", "scott"],
+                    "2": ["sarah"],
+                    "3": ["amy"],
+                    "4": [],
+                    "5": ["blake"]
+                },
+                "31": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["amy"],
+                    "if_false": ["alison"]
+                },
+                "32": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["amy", "alison"],
+                    "if_false": ["scott", "blake"]
+                },
+                "33": {
+                    "type": "bool",
+                    "value": 1,
+                    "if_true": ["alison"],
+                    "if_false": ["scott"]
+                },
+                "34": {
+                    "type": "str",
+                    "value": 1,
+                    "A": ["alison", "scott"],
+                    "B": [],
+                    "C": [],
+                    "D": []
+                }
+            },
+            "names": ["alison", "amy", "blake", "sarah", "scott"]
+        }
     
     def pull_data(self):
         answers = self.server.database.get_data("Current Answers")[0]
