@@ -1,102 +1,85 @@
-from pymongo import MongoClient
+import json
 
-class Database:
-    def __init__(self):
-        self.client = MongoClient("mongodb+srv://itzmind:ZVp41BnJG0WisQYw@evilsecrets.nbxj92y.mongodb.net/", 1678)
-        self.db = self.client.Data
-
-    def get_data(self, collection, query = dict()):
-        documents = list(self.db[collection].find(query))
-        filtered = []
-        for document in documents:
-            document.pop("_id")
-            filtered.append(document)
-        return filtered
-    def upload_data(self, collection, data):
-        try:
-            if isinstance(data, list) and data:
-                self.db[collection].insert_many(data)
-            elif data and isinstance(data, dict):
-                self.db[collection].insert_one(data)
-            else:
-                print.warning(
-                    f'Data for insertion to "{collection}" is not a list or dictionary, or is empty'
-                )
-        except Exception as err:
-            print(f"Unable to insert some documents into collection {collection}: {err}")
-
-class Server:
-    def __init__(self):
-        self.database = Database()
-        self.database.db["Results"].delete_many({})
-
-server = Server()
 class CalcPoints:
-    def __init__(self, server):
-        self.server = server
+    def __init__(self):
+        with open("current_answers.json", "r") as f:
+            self.answers = json.load(f)
 
         self.questions = {
             "answers": {
+                #Would you shoot me in the foot for good pizza?
                 "0": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["sarah"],
                     "if_false": ["alison"]
                 },
+                #If you were my parent and I came out as gay would you disown me?
                 "1": {
                     "type": "bool",
                     "value": 1,
-                    "if_true": ["amy"],
+                    "if_true": ["amy", "sarah"],
                     "if_false": ["alison"]
                 },
+                #If you were my parent and I came out as straight would you disown me?
                 "2": {
                     "type": "bool",
                     "value": 1,
-                    "if_true": ["alison"],
+                    "if_true": ["alison", "sarah"],
                     "if_false": ["scott", "amy"]
                 },
+                #Would you still be friends with me if I was short?
                 "3": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["blake"],
                     "if_false": ["alison", "scott", "sarah", "amy"]
                 },
+                #If you traveled back in time would you tell my mom to get an abortion?
                 "4": {
                     "type": "bool",
                     "value": 1,
                     "if_true": [],
                     "if_false": ["alison", "scott", "sarah", "amy", "blake"]
                 },
+                #5 is str
+                #If I tripped and fell would you laugh?
                 "6": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["alison", "amy", "sarah", "scott"],
                     "if_false": ["blake"]
                 },
+                #7 is str
+                #Would you hit me hard and soft?
                 "8": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["alison", "scott"],
                     "if_false": ["amy", "blake"]
                 },
+                #If you killed yourself would I be happier than ever?
                 "9": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["sarah"],
-                    "if_false": ["scott"]
+                    "if_false": ["scott", "alison"]
                 },
+                #If you got everything you wanted would you let me get everything I wanted?
                 "10": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["amy"],
                     "if_false": ["sarah", "alison"]
                 },
+                #If I was modern art...
                 "11": {
                     "type": "bool",
                     "value": 1,
-                    "if_true": ["amy"],
+                    "if_true": ["amy", "alison"],
                     "if_false": ["blake"]
                 },
+                #Are you indecisive?
                 "12": {
                     "type": "str",
                     "value": 1,
@@ -105,6 +88,7 @@ class CalcPoints:
                     "C": ["scott", "amy"],
                     "D": []
                 },
+                #If this was a multiple choice what answer would you choose?
                 "13": {
                     "type": "str",
                     "value": 1,
@@ -113,30 +97,36 @@ class CalcPoints:
                     "C": ["amy"],
                     "D": ["alison", "scott"]
                 },
+                #If we were both old and in a retirement community would you act like you don't know me
                 "14": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["blake", "sarah", "scott"],
                     "if_false": ["alison", "amy"]
                 },
+                #If I died would you pretend to have been my real friend?
                 "15": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["alison"],
                     "if_false": ["amy"]
                 },
+                #If I called you by your name would you call me by my name?
                 "16": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["alison", "scott", "sarah"],
                     "if_false": ["blake", "amy"]
                 },
+                #17,18,19 are str
+                #Would 100 me's beat a gorilla?
                 "20": {
                     "type": "bool",
                     "value": 1,
                     "if_true": [],
                     "if_false": ["alison", "scott"]
                 },
+                #Rate this joke: Your Mother
                 "21": {
                     "type": "int",
                     "value": 1,
@@ -146,6 +136,7 @@ class CalcPoints:
                     "4": [],
                     "5": ["scott", "sarah"]
                 },
+                #Rate this joke: What is blue and smells like red paint? Red paint to a color blind person
                 "22": {
                     "type": "int",
                     "value": 1,
@@ -155,6 +146,7 @@ class CalcPoints:
                     "4": [],
                     "5": ["alison", "amy"]
                 },
+                #Rate this joke: 2 robots drive into a bar. The 3rd was not a Tesla.
                 "23": {
                     "type": "int",
                     "value": 1,
@@ -164,30 +156,36 @@ class CalcPoints:
                     "4": [],
                     "5": ["alison", "scott", "amy"]
                 },
+                #If I was Trump would you have better aim?
                 "24": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["alison"],
                     "if_false": ["scott", "blake"]
                 },
+                #Would you suicide bomb citrus to end world hunger?
                 "25": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["sarah"],
                     "if_false": ["alison", "scott"]
                 },
+                #Conversion therapy is good yes or yes?
                 "26": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["scott", "amy"],
                     "if_false": ["alison"]
                 },
+                #Would you send your favorite ADHD friend to a camp to help concentration?
                 "27": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["amy"],
-                    "if_false": ["blake"]
+                    "if_false": ["blake", "alison"]
                 },
+                #28 str
+                #How likely do you think I would be to save you from an oven?
                 "29": {
                     "type": "int",
                     "value": 1,
@@ -197,6 +195,7 @@ class CalcPoints:
                     "4": ["scott"],
                     "5": ["alison"]
                 },
+                #If you were in 1930's Germany how likely would you have survived?
                 "30": {
                     "type": "int",
                     "value": 1,
@@ -206,24 +205,28 @@ class CalcPoints:
                     "4": [],
                     "5": ["blake"]
                 },
+                #If I was the CCP would you share stuff with me?
                 "31": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["amy"],
                     "if_false": ["alison"]
                 },
+                #Do you know what happened on May 35th, 1989?
                 "32": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["amy", "alison"],
                     "if_false": ["scott", "blake"]
                 },
+                #When God sings with his creations, will you not be part of the choir?
                 "33": {
                     "type": "bool",
                     "value": 1,
                     "if_true": ["alison"],
                     "if_false": ["scott"]
                 },
+                #Who made that last question? A: scott, b: alison, c: amy, d: someone else
                 "34": {
                     "type": "str",
                     "value": 1,
@@ -232,20 +235,17 @@ class CalcPoints:
                     "C": [],
                     "D": []
                 }
+                #35 str
             },
             "names": ["alison", "amy", "blake", "sarah", "scott"]
         }
     
-    def pull_data(self):
-        answers = self.server.database.get_data("Current Answers")[0]
-        return answers
     
     def calc_points(self):
-        answers = self.pull_data()
         point_totals = {name: 0 for name in self.questions["names"]}
-        print(answers)
+        print(self.answers)
         for question, vals in self.questions["answers"].items():
-            answer = answers[question]
+            answer = self.answers[question]
             if vals["type"] == "bool":
                 if answer:
                     for person in vals["if_true"]:
@@ -259,12 +259,10 @@ class CalcPoints:
                 for person in vals[answer]:
                     point_totals[person] += vals["value"]
         max_key = max(point_totals, key=point_totals.get)
-        answers["winner"] = max_key
-        self.server.database.upload_data("Results", {"winner": max_key})
-        self.server.database.upload_data("Answers", answers)
+        with open("results.json", "w") as f:
+            f.write(json.dumps({"winner": max_key}))
         print(point_totals)
         return point_totals
     
-calc = CalcPoints(server)
+calc = CalcPoints()
 pts = calc.calc_points()
-server.database.db["Current Answers"].delete_many({})
